@@ -8,6 +8,20 @@ async function getTodos() {
   // prisma.todo.create({ data: { title: "compile on server",  complete: false }})
 }
 
+async function toggleTodo(id: string, checked: boolean) {
+  "use server"
+  console.log(id, checked);
+
+  await prisma.todo.update({
+    where: { id },
+    data: {
+      complete: checked
+    }
+  });
+}
+  
+
+
 
 export default async function Home() {
 
@@ -24,7 +38,10 @@ export default async function Home() {
       </header>
       <ul className='pl-4'>
         { todos.map( todo => 
-          <TodoItem key={todo.id} {...todo} />
+          <TodoItem 
+            key={todo.id}
+            toggleTodo={ toggleTodo }
+            {...todo} />
         )}
       </ul>
 
