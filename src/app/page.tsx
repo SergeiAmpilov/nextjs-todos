@@ -5,7 +5,6 @@ import { TodoItem } from "./components/TodoItem";
 
 async function getTodos() {
   return prisma.todo.findMany();
-  // prisma.todo.create({ data: { title: "compile on server",  complete: false }})
 }
 
 async function toggleTodo(id: string, checked: boolean) {
